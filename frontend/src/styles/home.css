@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url("../assets/images/building.jpg");
+  color: white;
+  /* width: 100%; */
+  /* max-width: 1500px; */
+  /* margin: 0 auto; */
+}
+
+section {
+  margin: 5rem 2rem;
+}
+
+.section-one {
+  margin: 11rem 2rem 0;
+}
+
+.section-one-paragraph {
+  margin: 2rem 0;
+  width: 70%;
+  max-width: 500px;
+  line-height: 1.5rem;
+}
+
+.learn-more-btn {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: black;
+}
+
+.learn-more-btn:hover {
+  background: #6c83ff;
+  color: white;
+}
+
+.section-three h3 {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 700px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.flex-group {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.section-four p {
+  margin-bottom: 2rem;
+}
+
+.section-four-btn {
+  margin-bottom: rem;
+}
+
+.section-one,
+.section-three,
+.section-four {
+  margin-bottom: 20%;
+}
