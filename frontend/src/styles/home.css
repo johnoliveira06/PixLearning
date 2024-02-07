@@ -20,6 +20,11 @@ section {
   margin: 5rem 2rem;
 }
 
+.logo a {
+  text-decoration: none;
+  color: white;
+}
+
 .section-one {
   margin: 11rem 2rem 0;
 }

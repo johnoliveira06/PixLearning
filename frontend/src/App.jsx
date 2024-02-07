@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import BancodoBrasil from "./pages/BancodoBrasil";
+import Bradesco from "./pages/Bradesco";
 
 const Layout = () => {
   return (
     <>
-      <Navbar />
       <Outlet />
-      <Footer />
     </>
   );
 };
@@ -23,18 +23,24 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-  // {
-  //   path: "/",
-  //   element: <Layout/>,
-  //   children:[
-  //   {
-  //     path: "/login",
-  //     element: <Login/>
-  //   },
-  //   {
-  //     path: "/reset",
-  //     element: <ResetPassword/>
-  //   },
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/bancodobrasil",
+        element: <BancodoBrasil />,
+      },
+      {
+        path: "/bradesco",
+        element: <Bradesco />,
+      },
+    ],
+  },
   //   {
   //     path: "/cart",
   //     element: <Cart/>

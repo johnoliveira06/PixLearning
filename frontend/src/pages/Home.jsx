@@ -1,12 +1,31 @@
 import React from "react";
 import "../styles/home.css";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function Home() {
   return (
     <>
-      <Navbar />
+      <header>
+        <h1 class="logo">
+          <a href="/">SambaCrédito</a>
+        </h1>
+        <input type="checkbox" class="nav-toggle" id="nav-toggle" />
+        <nav>
+          <ul>
+            <li>
+              {" "}
+              <a href="/register">Abra sua conta</a>
+            </li>
+            <li>
+              {" "}
+              <a href="/login">Acesse sua conta</a>
+            </li>
+          </ul>
+        </nav>
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+        </label>
+      </header>
       <section class="section-one">
         <h2 class="header">Invista. Cresça. Conquiste.</h2>
         <p class="section-one-paragraph">
