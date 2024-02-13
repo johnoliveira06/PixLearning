@@ -1,0 +1,40 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.container-fluid h1 {
+  color: white;
+}
+
+.title {
+  text-align: center;
+}
+
+.account-info {
+  margin-bottom: 20px;
+}
+
+.transaction-history {
+  overflow-x: auto;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-table th,
+.transaction-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .transaction-table th,
+  .transaction-table td {
+    font-size: 14px;
+  }
+}

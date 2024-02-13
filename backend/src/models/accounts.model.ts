@@ -37,6 +37,7 @@ export class Accounts extends Entity {
   @property({
     type: 'number',
     required: true,
+    dataType: 'FLOAT'
   })
   balance: number;
 

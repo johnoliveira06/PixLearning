@@ -15,3 +15,7 @@ INSERT INTO Accounts (number, balance, agencies_id, customers_id) VALUES
 ('123456', '100', 1, 1),
 ('654321', '1000', 2, 2);
 
+INSERT INTO Transactions (date, type, amount, description, accounts_id) VALUES 
+(NOW(), 'Retirada', 50, 'Pagamento', 1),
+(NOW(), 'Entrada', 50, NULL, 2);
+
