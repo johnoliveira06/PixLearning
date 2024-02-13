@@ -61,7 +61,6 @@ function Login() {
                     console.log("Contas na agência", agency.id, ":", accounts);
 
                     accounts.forEach((account) => {
-                      console.log("oii", account.number);
                       if (account.number === accountNumber) {
                         accountFound = true;
                         alert("Login bem-sucedido!");

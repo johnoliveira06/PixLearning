@@ -20,6 +20,10 @@
   text-decoration-style: initial;
   text-decoration-color: #fff;
 }
+.footer h3 {
+  color: white;
+  text-transform: uppercase;
+}
 .abn {
   white-space: nowrap;
 }

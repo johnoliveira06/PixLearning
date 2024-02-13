@@ -26,24 +26,25 @@ function Home() {
           <span></span>
         </label>
       </header>
+      <div class="init">
+        <div class="main-container">
+          <div class="main">
+            <h1>Invista, Cresça, Conquiste.</h1>
+          </div>
+        </div>
+      </div>
       <section class="section-one">
-        <h2 class="header">Invista. Cresça. Conquiste.</h2>
-        <p class="section-one-paragraph">
-          Invista no seu futuro, cresça com nossas soluções financeiras e
-          aproveite cada conquista. Seu sucesso é o nosso compromisso.
-        </p>
+        <div class="middle-container">
+          <h3>
+            Transformando o presente, moldando o futuro. Tecnologia financeira
+            que enriquece vidas.
+          </h3>
+        </div>
+        <div class="clearfix"></div>
       </section>
-
-      <section class="section-three">
-        <h3>
-          Transformando o presente, moldando o futuro. Tecnologia financeira que
-          enriquece vidas.
-        </h3>
-      </section>
-
-      <section class="section-four">
-        <div class="flex-group">
-          <div class="content-container">
+      <section class="section-two">
+        <div className="flex-group">
+          <div class="end-container">
             <p>
               Em 2023 o SambaCrédito registrou um resultado recorrente geral
               impressionante de R$ 9,0 bilhões, um aumento de 3,4% em relação ao
@@ -57,6 +58,7 @@ function Home() {
             >
               Saiba mais
             </a>
+            <div class="clearfix"></div>
           </div>
         </div>
       </section>

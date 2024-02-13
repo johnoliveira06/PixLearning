@@ -9,7 +9,7 @@ function Footer() {
           <div class="message-container">
             <div class="message-contents">
               <p>
-                <h3 href="#">SambaCrédito</h3>
+                <h3>SambaCrédito</h3>
                 <ul className="about">
                   <li>
                     <a href="">Sobre nós</a>
