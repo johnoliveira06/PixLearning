@@ -34,6 +34,7 @@ BEGIN
         UPDATE Accounts SET balance = original_balance - transfer_value WHERE customers_id = 1;
         UPDATE Accounts SET balance = balance + transfer_value WHERE customers_id = 2;
         INSERT INTO Transactions (date, type, amount, description, accounts_id) VALUES (NOW(), 'Saída', transfer_value, NULL, 1);
+        INSERT INTO Transactions (date, type, amount, description, accounts_id) VALUES (NOW(), 'Entrada', transfer_value, NULL, 2);
     ELSE
         ROLLBACK;
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = rollback_message;
