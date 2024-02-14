@@ -62,6 +62,8 @@ Este projeto consiste na demonstração de uma transação de dados, utilizando 
   npm run migrate
   ```
 
+- **Execute o script SQL `populate.sql`, localizado no diretório `documents` para inserir os dados**
+
 - **Inicie o backend:**
 
   ```shell
