@@ -62,7 +62,7 @@ Este projeto consiste na demonstração de uma transação de dados, utilizando 
   npm run migrate
   ```
 
-- **Execute o script SQL `populate.sql`, localizado no diretório `documents` para inserir os dados**
+<!-- - **Execute o script SQL `populate.sql`, localizado no diretório `documents` para inserir os dados** -->
 
 - **Inicie o backend:**
 
@@ -79,3 +79,12 @@ Este projeto consiste na demonstração de uma transação de dados, utilizando 
 
   npm run dev
   ```
+
+---
+
+- **Dados para a realização de testes:**
+
+  | Bancos          | Agências | Contas |
+  | --------------- | -------- | ------ |
+  | Banco do Brasil | 1234     | 123456 |
+  | Bradesco        | 4321     | 654321 |

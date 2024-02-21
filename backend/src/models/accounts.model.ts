@@ -11,12 +11,12 @@ import {Transactions} from './transactions.model';
         entityKey: 'id',
         foreignKey: 'agencies_id',
       },
-      fk_customers_id:{
+      fk_customers_id: {
         name: 'fk_customers_id',
         entity: 'Customers',
         entityKey: 'id',
         foreignKey: 'customers_id',
-      }
+      },
     },
   },
 })
@@ -35,9 +35,15 @@ export class Accounts extends Entity {
   number: string;
 
   @property({
+    type: 'string',
+    required: true,
+  })
+  password: string;
+
+  @property({
     type: 'number',
     required: true,
-    dataType: 'FLOAT'
+    dataType: 'FLOAT',
   })
   balance: number;
 
