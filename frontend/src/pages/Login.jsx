@@ -6,14 +6,29 @@ import "../styles/login.css";
 import { getBankList } from "../services/apiServices";
 
 function Login() {
+  const [banks, setBanks] = useState([]);
   const [selectedBank, setSelectedBank] = useState("");
   const [agency, setAgency] = useState("");
   const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
   const [agencyError, setAgencyError] = useState(false);
   const [accountError, setAccountError] = useState(false);
   const [accountNumber, setAccountNumber] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getBanks() {
+      try {
+        const response = await axios.get("http://localhost:3000/banks");
+        setBanks(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar bancos:", error);
+      }
+    }
+
+    getBanks();
+  }, []);
 
   const handleBankChange = (e) => {
     setSelectedBank(e.target.value);
@@ -45,6 +60,10 @@ function Login() {
   useEffect(() => {
     getBanks();
   }, []);
+  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleLogin = (e) => {
 
@@ -59,13 +78,11 @@ function Login() {
       .get(`http://localhost:3000/banks/${selectedBank}`)
       .then((bankResponse) => {
         const bankId = bankResponse.data.id;
-        console.log("Informações do banco:", bankResponse.data);
 
         axios
           .get(`http://localhost:3000/banks/${bankId}/agencies`)
           .then((agenciesResponse) => {
             const agencies = agenciesResponse.data;
-            console.log("Agências no banco:", agencies);
 
             let accountFound = false;
             agencies.forEach((agency) => {
@@ -74,10 +91,12 @@ function Login() {
                   .get(`http://localhost:3000/agencies/${agency.id}/accounts`)
                   .then((accountsResponse) => {
                     const accounts = accountsResponse.data;
-                    console.log("Contas na agência", agency.id, ":", accounts);
 
                     accounts.forEach((account) => {
-                      if (account.number === accountNumber) {
+                      if (
+                        account.number === accountNumber &&
+                        account.password === password
+                      ) {
                         accountFound = true;
                         alert("Login bem-sucedido!");
                         if (selectedBank === "1") {
@@ -93,7 +112,7 @@ function Login() {
             });
 
             if (!accountFound && accountNumber) {
-              alert("Agência ou conta incorretas. Tente novamente.");
+              alert("Agência, conta ou senha incorretas. Tente novamente.");
             }
           })
           .catch((err) => console.log(err));
@@ -118,8 +137,11 @@ function Login() {
               value={selectedBank}
             >
               <option value="">Escolha...</option>
-              <option value="1">Banco do Brasil</option>
-              <option value="2">Bradesco</option>
+              {banks.map((bank) => (
+                <option key={bank.id} value={bank.id}>
+                  {bank.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="col-md-6">
@@ -135,7 +157,7 @@ function Login() {
             )}
           </div>
           <div className="col-md-6">
-            <label htmlFor="inputPassword4" className="form-label">
+            <label htmlFor="inputPassword" className="form-label">
               Conta
             </label>
             <input
@@ -147,6 +169,18 @@ function Login() {
             {accountError && (
               <p className="error">Conta deve conter 6 números</p>
             )}
+          </div>
+          <div className="col-12">
+            <label htmlFor="inputPassword" className="form-label">
+              Senha
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="inputPassword"
+              value={password}
+              onChange={handlePasswordChange}
+            />
           </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary">

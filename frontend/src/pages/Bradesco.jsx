@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Modal from "react-modal";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/bradesco.css";
 
@@ -10,11 +11,24 @@ function Bradesco() {
   const [agencyData, setAgencyData] = useState(null);
   const [bankData, setBankData] = useState(null);
   const [transactionData, setTransactionData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [password, setPassword] = useState("");
   const [transferData, setTransferData] = useState({
     agencia: "",
     conta: "",
     valor: "",
   });
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
 
   const notify = () =>
     toast.success("Transferência realizada com sucesso!", {
@@ -99,6 +113,10 @@ function Bradesco() {
       alert("Seu saldo é insuficiente para a transação.");
       return;
     }
+    if (password !== accountData[1].password) {
+      alert("Senha incorreta. Tente novamente.");
+      return;
+    }
 
     const newTransaction = {
       date: new Date().toISOString(),
@@ -138,6 +156,7 @@ function Bradesco() {
           .put("http://localhost:3000/accounts/" + accountData[1].id, {
             number: accountData[1].number,
             balance: updatedOriginBalance,
+            password: accountData[0].password,
             agencies_id: agencyData[1].id,
             customers_id: customerData.id,
           })
@@ -167,6 +186,7 @@ function Bradesco() {
       .catch((error) => {
         alert("Erro ao realizar transferência: " + error.response.data.message);
       });
+    setIsModalOpen(false);
   };
 
   return (
@@ -235,7 +255,10 @@ function Bradesco() {
             }}
           />
         </div>
-        <button className="btn btn-danger" onClick={handleTransfer}>
+        <button
+          className="btn btn-primary"
+          onClick={() => setIsModalOpen(true)}
+        >
           Transferir
         </button>
         <ToastContainer />
@@ -261,6 +284,23 @@ function Bradesco() {
           </tbody>
         </table>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="Transferência"
+        style={customStyles}
+      >
+        <h2>Senha</h2>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Informe sua senha"
+        />
+        <button className="btn btn-primary" onClick={handleTransfer}>
+          Confirmar transferência
+        </button>
+      </Modal>
     </>
   );
 }
