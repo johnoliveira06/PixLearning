@@ -98,22 +98,23 @@ function Login() {
                         account.password === password
                       ) {
                         accountFound = true;
-                        alert("Login bem-sucedido!");
+                        // alert("Login bem-sucedido!");
                         if (selectedBank === "1") {
                           navigate("/bancodobrasil");
                         } else if (selectedBank === "2") {
                           navigate("/bradesco");
                         }
-                      }
+                        // if (!accountFound && accountNumber) {
+                        }
                     });
+                    if (!accountFound) {
+                      alert("Agência, conta ou senha incorretas. Tente novamente.");
+                    }
                   })
                   .catch((err) => console.log(err));
               }
             });
 
-            if (!accountFound && accountNumber) {
-              alert("Agência, conta ou senha incorretas. Tente novamente.");
-            }
           })
           .catch((err) => console.log(err));
       })
