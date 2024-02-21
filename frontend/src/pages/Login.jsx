@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
+import { getBankList } from "../services/apiServices";
 
 function Login() {
   const [selectedBank, setSelectedBank] = useState("");
@@ -31,7 +32,22 @@ function Login() {
     setAccountNumber(newAccount);
   };
 
+  const [data, setData] = useState(null);
+  async function getBanks() {
+    try {
+      const result = await getBankList();
+      setData(result);
+    } catch (error) {
+      console.log('Error fetching data: ', error)
+    }
+  }
+
+  useEffect(() => {
+    getBanks();
+  }, []);
+
   const handleLogin = (e) => {
+
     e.preventDefault();
 
     if (!selectedBank) {
