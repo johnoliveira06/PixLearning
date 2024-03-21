@@ -36,12 +36,6 @@ const router = createBrowserRouter([
       {
         path: "/bancodobrasil",
         element: <BancodoBrasil />,
-        // children: [
-        //   {
-        //     path: "pixkeys",
-        //     element: <PixKeysPage />
-        //   },
-        // ],
       },
       {
         path: "/bradesco",
@@ -53,16 +47,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  //   {
-  //     path: "/cart",
-  //     element: <Cart/>
-  //   },
-  //   {
-  //     path: "/orders",
-  //     element: <Orders/>
-  //   }
-  //   ]
-  // },
 ]);
 
 function App() {
