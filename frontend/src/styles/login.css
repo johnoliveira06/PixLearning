@@ -9,3 +9,14 @@
 .login {
   margin: 20%;
 }
+
+.login-button {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 250px;
+  background-color: #0038A8;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
