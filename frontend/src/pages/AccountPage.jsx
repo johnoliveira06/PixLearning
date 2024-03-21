@@ -5,18 +5,21 @@ import Modal from "react-modal";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/bancodobrasil.css";
 import "../styles/TransactionsList.css";
+import "../styles/AccountPage.css";
 import AccountInfo from "../components/AccountInfo";
 import BalanceBox from "../components/BalanceBox";
 import TransactionsList from "../components/TransactionsList";
 import Toolbar from "../components/Toolbar";
+import { useNavigate } from "react-router-dom";
+
+function loadSession() {
+  const data = sessionStorage.getItem('accountLogged');
+  return data != null ? data : false; 
+}
 
 function AccountPage() {
   const [account, setAccount] = useState([]);
-
-  // useEffect(() => {
-  //   setAccount(JSON.parse(sessionStorage.getItem('accountData')));
-  //   console.log('acc', account);
-  // }, []);
+  const accountLogged = useState(loadSession());
 
   const [accountData, setAccountData] = useState(null);
   const [customerData, setCustomerData] = useState(null);
@@ -31,8 +34,7 @@ function AccountPage() {
     valor: "",
   });
 
-  // const [accountDataSession, setAccountDataSession] = useState(null);
-  // setAccountDataSession(sessionStorage.getItem('accountData'));
+  const navigate = useNavigate();
 
   const customStyles = {
     content: {
@@ -51,61 +53,11 @@ function AccountPage() {
       autoClose: 2500,
     });
 
-  useEffect(() => {
-    // setAccount(JSON.parse(sessionStorage.getItem('accountData')));
-    // console.log(sessionStorage.getItem('accountData'));
-    console.log(account);
-    // console.log(account);
-
-    axios
-      .get("http://localhost:3000/accounts")
-      .then((response) => {
-        // console.log(response.data);
-        setAccountData(response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados da conta:", error);
-      });
-
-    axios
-      .get("http://localhost:3000/customers/1")
-      .then((response) => {
-        setCustomerData(response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados do cliente:", error);
-      });
-
-    axios
-      .get("http://localhost:3000/agencies")
-      .then((response) => {
-        // console.log(response.data);
-        setAgencyData(response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados da agência:", error);
-      });
-
-    axios
-      .get("http://localhost:3000/accounts/1/transactions")
-      .then((response) => {
-        // console.log(response.data);
-        setTransactionData(Array.isArray(response.data) ? response.data : []);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados das transações:", error);
-      });
-
-    axios
-      .get("http://localhost:3000/banks/1")
-      .then((response) => {
-        // console.log(response.data);
-        setBankData(response.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados do banco:", error);
-      });
-  }, []);
+  const handleLogout = () => {
+    sessionStorage.setItem('accountLogged', false);
+    sessionStorage.removeItem('accountData');
+    navigate("/");
+  }
 
   const handleTransfer = () => {
     console.log(`Agência da conta destino: ${transferData.agencia}
@@ -215,21 +167,24 @@ function AccountPage() {
         <div className="container-fluid">
           <img src="../assets/icons/logoBB.svg" alt="" srcSet="" />
           <a className="navbar-brand">Banco do Brasil</a>
-          <button className="btn btn-primary">
+          {/* <button className="btn btn-primary">
             <a href="/">Logout</a>
-          </button>
+          </button> */}
+          <button
+              onClick={handleLogout}
+              className="logout-button"
+            >Sair
+          </button>               
         </div>
       </nav>
       <div className="container">
-
         <BalanceBox />
         <Toolbar />
-
         {/* <AccountInfo /> */}
-        
         <TransactionsList />
-
       </div>
+
+{/* 
       <div className="transfer-form">
         <h2>Transferência</h2>
         <div className="input-group mb-3">
@@ -271,9 +226,9 @@ function AccountPage() {
           Transferir
         </button>
         <ToastContainer />
-      </div>
+      </div> */}
 
-      <Modal
+      {/* <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
         contentLabel="Transferência"
@@ -289,7 +244,8 @@ function AccountPage() {
         <button className="btn btn-primary" onClick={handleTransfer}>
           Confirmar transferência
         </button>
-      </Modal>
+      </Modal> */}
+  
     </>
   );
 }
