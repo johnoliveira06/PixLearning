@@ -1,126 +1,27 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.nav {
-  margin: 0;
-  padding: 20px 0;
-}
-
-.nav li {
-  display: inline;
-  color: #fff;
-  font-family: "Raleway", sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.logo a {
-  text-decoration: none;
-  color: white;
-}
-
-.main-container {
-  max-width: 940px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
-.init {
-  background: url("../assets/images/city.jpeg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 800px;
-}
-
-.main {
-  position: relative;
-  top: 180px;
-  text-align: center;
-}
-
-.main h1 {
-  color: black;
-  font-family: "Raleway", sans-serif;
-  font-weight: 600;
-  font-size: 70px;
-  margin-top: 0;
-  margin-bottom: 80px;
-  text-transform: uppercase;
-  margin-left: 10em;
-}
-
-.section-one,
-.section-two {
-  /* margin-bottom: 10%; */
-  padding-top: 80px;
-  padding-bottom: 100px;
-}
-
-.middle-container h3 {
-  margin: 0 auto;
-  width: 80%;
-  max-width: 700px;
-  font-size: 2.5rem;
-  font-weight: 600;
-  text-align: center;
-  color: black;
-}
-
-.flex-group {
+.container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
-.section-two p {
-  max-width: 500px;
-  color: black;
-  text-align: justify;
-}
-.section-two {
-  background-color: #88b3d9;
+.content {
+  text-align: center;
 }
 
-.learn-more-btn {
-  background: black;
-  padding: 10px 20px;
-  border-radius: 50px;
-  font-size: 0.8rem;
+.content a {
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
-.learn-more-btn:hover {
-  background: #6c83ff;
-  color: white;
+.bank-item {
+  margin-bottom: 50px;
 }
 
-.clearfix {
-  clear: both;
-}
-
-@media (max-width: 768px) {
-  .main h1 {
-    font-size: 50px;
-    margin-left: 0;
-    color: white;
-  }
-
-  .section-two {
-    padding-top: 40px;
-  }
-
-  .middle-container h3 {
-    width: 100%;
-    padding: 0 20px;
-    font-size: 1.5rem;
-  }
+.bank-button {
+  display: block;
+  margin: 0 auto;
 }
