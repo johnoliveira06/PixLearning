@@ -1,11 +1,48 @@
 import React from "react";
 import "../styles/home.css";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+import ReactDOM from 'react-dom';
+
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
-      <header>
+      <div>
+        <div>Escolha seu banco</div>
+        <div>
+          <button
+            onClick={() => {
+              /* 1. Navigate to the Details route with params */
+              navigate('login', {
+                state: {
+                  bank_id: 1,
+                  name: "Banco do Brasil"
+                }
+              });
+            }}
+            >Banco do Brasil
+          </button>
+        </div>
+
+        <div>
+          <button
+              onClick={() => {
+                /* 1. Navigate to the Details route with params */
+                navigate('login',  {
+                  state: {
+                    bank_id: 2,
+                    name: "Bradesco"
+                  }
+                });
+              }}
+            >Bradesco
+          </button>    
+        </div>
+      </div>
+      {/* <header>
         <h1 class="logo">
           <a href="/">SambaCrédito</a>
         </h1>
@@ -26,6 +63,7 @@ function Home() {
           <span></span>
         </label>
       </header>
+
       <div class="init">
         <div class="main-container">
           <div class="main">
@@ -62,7 +100,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
