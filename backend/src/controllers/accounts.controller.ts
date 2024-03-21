@@ -58,6 +58,24 @@ export class AccountsController {
     return this.accountsRepository.count(where);
   }
 
+  @get('/accounts/login')
+  @response(200, {
+    description: 'Accounts model instance',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Accounts, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async login(
+    @param.filter(Accounts) filter?: Filter<Accounts>,
+  ): Promise<Accounts[]> {
+    return this.accountsRepository.find(filter);
+  }
+
   @get('/accounts')
   @response(200, {
     description: 'Array of Accounts model instances',

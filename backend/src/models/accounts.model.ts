@@ -1,6 +1,7 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Pixkeys} from './pixkeys.model';
 import {Transactions} from './transactions.model';
+import { Customers } from './customers.model';
 
 @model({
   settings: {

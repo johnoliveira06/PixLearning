@@ -38,6 +38,8 @@ export class Pixkeys extends Entity {
   })
   accounts_id: number;
 
+  
+
 
   constructor(data?: Partial<Pixkeys>) {
     super(data);

@@ -48,24 +48,26 @@ function Login() {
   };
 
   const [data, setData] = useState(null);
-  async function getBanks() {
+  async function getBanksRennan() {
     try {
       const result = await getBankList();
+      console.log(result);
       setData(result);
     } catch (error) {
       console.log('Error fetching data: ', error)
     }
+    console.log(data);
   }
 
   useEffect(() => {
-    getBanks();
+    getBanksRennan();
   }, []);
-  
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
-  const handleLogin = (e) => {
+  
+  const handleLogin = (e) => {  
 
     e.preventDefault();
 
@@ -100,13 +102,19 @@ function Login() {
                         accountFound = true;
                         // alert("Login bem-sucedido!");
                         if (selectedBank === "1") {
-                          navigate("/bancodobrasil");
+                          sessionStorage.setItem('accountLogged', true);
+                          sessionStorage.setItem('accountData', JSON.stringify(account));
+                          // const result = JSON.parse(sessionStorage.getItem('accountData'));
+                          // console.log(result);
+                          // console.log(result.balance);
+                          // sessionStorage.removeItem('accountData');
+                          navigate("/account");
                         } else if (selectedBank === "2") {
                           navigate("/bradesco");
                         }
                         // if (!accountFound && accountNumber) {
                         }
-                    });
+                      });
                     if (!accountFound) {
                       alert("Agência, conta ou senha incorretas. Tente novamente.");
                     }

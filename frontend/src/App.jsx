@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import BancodoBrasil from "./pages/BancodoBrasil";
 import Bradesco from "./pages/Bradesco";
+import PixKeysPage from "./pages/PixKeysPage";
+import AccountPage from "./pages/AccountPage";
 
 const Layout = () => {
   return (
@@ -34,10 +36,20 @@ const router = createBrowserRouter([
       {
         path: "/bancodobrasil",
         element: <BancodoBrasil />,
+        // children: [
+        //   {
+        //     path: "pixkeys",
+        //     element: <PixKeysPage />
+        //   },
+        // ],
       },
       {
         path: "/bradesco",
         element: <Bradesco />,
+      },
+      {
+        path: "/account",
+        element: <AccountPage />
       },
     ],
   },

@@ -23,6 +23,7 @@ export class BackendApplication extends BootMixin(
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
+    // this.static('/accounts/login', '/accounts/login');
 
     // Customize @loopback/rest-explorer configuration here
     this.configure(RestExplorerBindings.COMPONENT).to({
