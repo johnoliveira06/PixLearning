@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/login.css";
 import { getBankList } from "../services/apiServices";
+import toast, { toastConfig } from 'react-simple-toasts';
+import 'react-simple-toasts/dist/theme/dark.css'; // choose your theme
+import 'react-simple-toasts/dist/theme/failure.css'; // choose your theme
+
+toastConfig({ theme: 'failure' }); // configure global toast settings, like theme
 
 function Login() {
   const [banks, setBanks] = useState([]);
@@ -14,6 +19,15 @@ function Login() {
   const [agencyError, setAgencyError] = useState(false);
   const [accountError, setAccountError] = useState(false);
   const [accountNumber, setAccountNumber] = useState("");
+
+  const textInput = useRef(null);
+
+  const { state } = useLocation(); // Obtendo o estado passado via navigate
+  const bankData = {
+    id: state && state.bank_id, // Obtendo o nome do usuário do estado
+    name: state && state.name, // Obtendo o nome do usuário do estado
+  };
+  console.log(bankData);
 
   const navigate = useNavigate();
 
@@ -66,108 +80,57 @@ function Login() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  
-  const handleLogin = (e) => {  
 
-    e.preventDefault();
-
-    if (!selectedBank) {
-      alert("Por favor, selecione um banco.");
-      return;
-    }
+  const handleNewLogin = () => {
+    let url = `http://localhost:3000/accounts?filter[where][agencies_id]=${agency}&filter[where][number]=${account}&filter[where][password]=${password}`;
 
     axios
-      .get(`http://localhost:3000/banks/${selectedBank}`)
-      .then((bankResponse) => {
-        const bankId = bankResponse.data.id;
+    .get(url)
+    .then((loginResponse) => {
+      const account = loginResponse.data;
 
-        axios
-          .get(`http://localhost:3000/banks/${bankId}/agencies`)
-          .then((agenciesResponse) => {
-            const agencies = agenciesResponse.data;
-
-            let accountFound = false;
-            agencies.forEach((agency) => {
-              if (!accountFound) {
-                axios
-                  .get(`http://localhost:3000/agencies/${agency.id}/accounts`)
-                  .then((accountsResponse) => {
-                    const accounts = accountsResponse.data;
-
-                    accounts.forEach((account) => {
-                      if (
-                        account.number === accountNumber &&
-                        account.password === password
-                      ) {
-                        accountFound = true;
-                        // alert("Login bem-sucedido!");
-                        if (selectedBank === "1") {
-                          sessionStorage.setItem('accountLogged', true);
-                          sessionStorage.setItem('accountData', JSON.stringify(account));
-                          // const result = JSON.parse(sessionStorage.getItem('accountData'));
-                          // console.log(result);
-                          // console.log(result.balance);
-                          // sessionStorage.removeItem('accountData');
-                          navigate("/account");
-                        } else if (selectedBank === "2") {
-                          navigate("/bradesco");
-                        }
-                        // if (!accountFound && accountNumber) {
-                        }
-                      });
-                    if (!accountFound) {
-                      alert("Agência, conta ou senha incorretas. Tente novamente.");
-                    }
-                  })
-                  .catch((err) => console.log(err));
-              }
-            });
-
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
-  };
+      if (account.length === 1) {
+        sessionStorage.setItem('accountLogged', true);
+        sessionStorage.setItem('accountData', JSON.stringify(account[0]));
+        navigate("/account");
+      } else {
+        textInput.current?.focus();
+        toast('Dados incorretos! Tente novamente mais tarde.')
+      }
+    });
+  }
 
   return (
     <>
       <Navbar />
       <div className="login">
-        <h1>Entre na sua conta digital</h1>
-        <form className="row g-3" onSubmit={handleLogin}>
+        <h1>{bankData.name}</h1>
           <div className="col-12">
             <label className="form-label" htmlFor="inlineFormSelectPref">
-              Escolha seu banco
+              Entre na sua conta digital
             </label>
-            <select
-              className="form-select"
+            <input
+              type="hidden"
               id="inlineFormSelectPref"
-              onChange={handleBankChange}
-              value={selectedBank}
-            >
-              <option value="">Escolha...</option>
-              {banks.map((bank) => (
-                <option key={bank.id} value={bank.id}>
-                  {bank.name}
-                </option>
-              ))}
-            </select>
+              defaultValue={bankData.id}
+            />
+
           </div>
           <div className="col-md-6">
-            <label className="form-label">Agência</label>
+            <label className="form-label">Código da Agência</label>
             <input
               type="text"
               className={`form-control ${agencyError ? "is-invalid" : ""}`}
               value={agency}
               onChange={handleAgencyChange}
-            />
+              ref={textInput}            />
             {agencyError && (
               <p className="error">Agência não pode estar vazia</p>
             )}
           </div>
           <div className="col-md-6">
             <label htmlFor="inputPassword" className="form-label">
-              Conta
+              Número da Conta
             </label>
             <input
               type="text"
@@ -192,11 +155,12 @@ function Login() {
             />
           </div>
           <div className="col-12">
-            <button type="submit" className="btn btn-primary">
-              Entrar
-            </button>
+            <button
+              onClick={handleNewLogin}
+              className="login-button"
+            >Entrar
+            </button>               
           </div>
-        </form>
       </div>
     </>
   );
