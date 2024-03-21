@@ -29,19 +29,22 @@ function TransactionsList(props) {
   }, []);
 
   return (
-    <div id="transactions-list">
-      {transactionsList.map( (data,i) => {
-        return (
-          <TransactionItem 
-          key={i}
-            id={data.id}
-            date={data.date.substring(0,10)}
-            type={data.type}
-            amount={data.amount}
-            description={data.description}
-          />
-        )
-      })}
+    <div>
+    <h4 className="transactions-title">Extrato</h4>
+      <div id="transactions-list">
+        {transactionsList.map( (data,i) => {
+          return (          
+            <TransactionItem 
+            key={i}
+              id={data.id}
+              date={data.date.substring(0,10)}
+              type={data.type}
+              amount={data.amount}
+              description={data.description}
+            />
+          )
+        })}
+      </div>
     </div>
   );
 }
