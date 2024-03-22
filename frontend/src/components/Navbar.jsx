@@ -11,7 +11,7 @@ function Navbar() {
             <FaArrowLeft className="back-arrow" />
           </a>
         </div>
-        <h1 className="logo">SambaCrédito</h1>
+        <h1 className="logo">Acesse seu banco</h1>
       </header>
     </>
   );
