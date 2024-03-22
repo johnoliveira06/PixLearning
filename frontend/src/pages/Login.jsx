@@ -27,7 +27,7 @@ function Login() {
     id: state && state.bank_id, // Obtendo o nome do usuário do estado
     name: state && state.name, // Obtendo o nome do usuário do estado
   };
-  console.log(bankData);
+  // console.log(bankData);
 
   const navigate = useNavigate();
 
@@ -65,7 +65,6 @@ function Login() {
   async function getBanksRennan() {
     try {
       const result = await getBankList();
-      console.log(result);
       setData(result);
     } catch (error) {
       console.log('Error fetching data: ', error)
