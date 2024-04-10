@@ -5,14 +5,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/login.css";
 import { getBankList } from "../services/apiServices";
 import toast, { toastConfig } from "react-simple-toasts";
-import "react-simple-toasts/dist/theme/dark.css"; // choose your theme
-import "react-simple-toasts/dist/theme/failure.css"; // choose your theme
+import "react-simple-toasts/dist/theme/dark.css";
+import "react-simple-toasts/dist/theme/failure.css";
 
-toastConfig({ theme: "failure" }); // configure global toast settings, like theme
+toastConfig({ theme: "failure" });
 
 function Login() {
-  const [banks, setBanks] = useState([]);
-  const [selectedBank, setSelectedBank] = useState("");
   const [agency, setAgency] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -22,31 +20,13 @@ function Login() {
 
   const textInput = useRef(null);
 
-  const { state } = useLocation(); // Obtendo o estado passado via navigate
+  const { state } = useLocation();
   const bankData = {
-    id: state && state.bank_id, // Obtendo o nome do usuário do estado
-    name: state && state.name, // Obtendo o nome do usuário do estado
+    id: state && state.bank_id,
+    name: state && state.name,
   };
-  // console.log(bankData);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function getBanks() {
-      try {
-        const response = await axios.get("http://localhost:3000/banks");
-        setBanks(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar bancos:", error);
-      }
-    }
-
-    getBanks();
-  }, []);
-
-  const handleBankChange = (e) => {
-    setSelectedBank(e.target.value);
-  };
 
   const handleAgencyChange = (e) => {
     const newAgency = e.target.value;
@@ -60,21 +40,6 @@ function Login() {
     setAccountError(newAccount.length !== 6);
     setAccountNumber(newAccount);
   };
-
-  const [data, setData] = useState(null);
-  async function getBanksRennan() {
-    try {
-      const result = await getBankList();
-      setData(result);
-    } catch (error) {
-      console.log("Error fetching data: ", error);
-    }
-    console.log(data);
-  }
-
-  useEffect(() => {
-    getBanksRennan();
-  }, []);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);

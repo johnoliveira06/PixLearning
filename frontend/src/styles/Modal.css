@@ -1,0 +1,51 @@
+.custom-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.custom-modal h4 {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.custom-modal input[type="text"],
+.custom-modal input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.custom-modal input[type="text"]::placeholder,
+.custom-modal input[type="password"]::placeholder {
+  color: #999;
+}
+
+.custom-modal button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-modal button:hover {
+  background-color: #0056b3;
+}
