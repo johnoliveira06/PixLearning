@@ -94,6 +94,24 @@ export class AccountsController {
     return this.accountsRepository.find(filter);
   }
 
+  @post('/accounts/transfers')
+  @response(200, {
+    description: 'Make a transfer between to accounts',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'text',
+          items: getModelSchemaRef(Accounts, {includeRelations: true}),
+        },
+      },
+    },
+  })
+  async transfer(
+    @param.filter(Accounts) filter?: Filter<Accounts>,
+  ): Promise<Accounts[]> {
+    return this.accountsRepository.find(filter);
+  }  
+
   @patch('/accounts')
   @response(200, {
     description: 'Accounts PATCH success count',
