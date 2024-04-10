@@ -178,9 +178,9 @@ function AccountPage() {
         </div>
       </nav>
       <div className="container">
+        <AccountInfo />
         <BalanceBox />
-        <Toolbar />
-        {/* <AccountInfo /> */}
+        <Toolbar navigate={navigate} />
         <TransactionsList />
       </div>
 

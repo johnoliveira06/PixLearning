@@ -11,6 +11,7 @@ import BancodoBrasil from "./pages/BancodoBrasil";
 import Bradesco from "./pages/Bradesco";
 import PixKeysPage from "./pages/PixKeysPage";
 import AccountPage from "./pages/AccountPage";
+import TransferPage from "./pages/TransferPage";
 
 const Layout = () => {
   return (
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <AccountPage />
+      },
+      {
+        path: "/transfer",
+        element: <TransferPage />
       },
     ],
   },

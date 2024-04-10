@@ -29,7 +29,7 @@ function TransactionsList(props) {
   }, []);
 
   return (
-    <div>
+    <div className="transactions-card">
     <h4 className="transactions-title">Extrato</h4>
       <div id="transactions-list">
         {transactionsList.map( (data,i) => {
