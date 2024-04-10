@@ -26,9 +26,9 @@ function Home() {
   };
 
   return (
-    <div className="container">
+    <div className="home-container">
       <h1>Escolha seu banco</h1>
-      <div className="content">
+      <div className="home-content">
         {banks.map((bank) => (
           <div key={bank.id} className="bank-item">
             <a
