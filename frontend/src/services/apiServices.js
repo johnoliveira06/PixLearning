@@ -7,29 +7,14 @@ const apiService = axios.create({
     baseURL: apiUrl,
 });
 
+export function isEmpty(obj) { 
+    return Object.keys(obj).length === 0; 
+} 
+
 export const getBankList = async () => {
-    // const [data, setData] = useState([]);
-
-
-    // async function getBanks() {
-    //   try {
-    //     const result = await getBankList();
-    //     setData(result);
-    //   } catch (error) {
-    //     console.log('Error fetching data: ', error)
-    //   }
-    // }
-  
-    // useEffect(() => {
-    //   getBanks();
-    // }, []);
-
-
     try {
         const response = await apiService.get('/banks');
         return response.data;
-        // setData(response);
-        // return data;
     } catch (error) {
         throw error;
     }
@@ -37,7 +22,26 @@ export const getBankList = async () => {
 
 export async function getTransactionsList(accounts_id) {
     try {
-        const response = await apiService.get('/transactions?filter[where][accounts_id]='+accounts_id);
+        const response = (await apiService.get('/transactions?filter[where][accounts_id]='+accounts_id));
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export async function getPixKey(pixKey) {
+    try {
+        const response = (await apiService.get('/pixkeys?filter[where][key]='+pixKey));
+        // console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export async function getAccount(accounts_id) {
+    try {
+        const response = (await apiService.get('/accounts?filter[where][id]='+ accounts_id));
         // console.log(response.data);
         return response.data;
     } catch (error) {
